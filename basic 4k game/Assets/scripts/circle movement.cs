@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class circlemovement : MonoBehaviour
 {
-    public float speed = 2.5f;
+    private float speed = 2f;
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.down * speed * Time.deltaTime;
+        if (GameSettings.instance != null)
+        {
+            transform.position += Vector3.down * speed * Time.deltaTime;
+        }
+        else
+        {
+            Debug.Log("instance doesn't work");
+        }
     }
 }
