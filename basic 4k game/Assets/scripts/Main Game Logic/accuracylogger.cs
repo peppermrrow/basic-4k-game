@@ -5,22 +5,21 @@ public class AccuracyLogger : MonoBehaviour
 {
     private List<AccuracyRating> accuracyLog = new List<AccuracyRating>();
     internal float accuracy = 0;
-    int total;
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        //need to change scene to show results. will work on resetting later
+        DontDestroyOnLoad(gameObject); 
     }
     public void LogAccuracy(AccuracyRating rating)
     {
         accuracyLog.Add(rating);
-        total++;
         Debug.Log("Accuracy logged: " + rating.ToString());
     }
     public void CalculateAccuracyPercentage()
     {
-        // Define weights for each accuracy rating
         Dictionary<AccuracyRating, float> accuracyWeights = new Dictionary<AccuracyRating, float>
         {
+            // accuracy percentages
             { AccuracyRating.Perfect, 1.0f },
             { AccuracyRating.Good, 0.75f },
             { AccuracyRating.OK, 0.3f },
@@ -36,7 +35,6 @@ public class AccuracyLogger : MonoBehaviour
             {
                 totalWeight += accuracyWeights[rating];
             }
-            // Optionally handle unexpected enum values
         }
 
         // Calculate percentage
